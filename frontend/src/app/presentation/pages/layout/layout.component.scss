@@ -1,0 +1,36 @@
+.toolbar-spacing {
+  margin-left: 30px;
+}
+
+mat-toolbar {
+  padding-top: 10px !important;
+}
+
+#logout-btn {
+  z-index: 10;
+  position: absolute;
+  right: 20px;
+  top: 40px;
+}
+
+#toolbar-actions {
+  width: 100%;
+}
+
+#app-name {
+  font-size: 30px !important;
+  margin-left: 20px;
+}
+
+#app-subtitle {
+  font-size: 12px;
+  margin-left: 12px;
+}
+
+::ng-deep .navigation-tabs .mat-tab-label-container{
+  display:none;
+}
+
+.vertical-align-text{
+  padding-top: 2.5px;
+}

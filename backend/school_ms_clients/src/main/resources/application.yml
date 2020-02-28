@@ -1,0 +1,24 @@
+server:
+    port: 3036
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: ''
+        url: jdbc:mysql://localhost:3306/school-ms-clients?serverTimezone=UTC
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
+        show-sql: false
+    application:
+        name: clients-service
+    cloud:
+        discovery:
+            enabled: true
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka

@@ -1,0 +1,38 @@
+<div class="container" [style.backgroundImage]="'url('+ backgroundImagePath +')'">
+  <div class="login-container">
+    <mat-card class="example-card">
+      <div id="app-logo-center" style="text-align: center">
+        <img src="assets/img/logo-isma.png" width="100">
+      </div>
+      <br>
+      <mat-card-header>
+        <mat-card-title>Admin Panel</mat-card-title>
+        <mat-card-subtitle>ISMA - Gestion intelligente d'une école.</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="userLoginForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Identifiant</mat-label>
+            <input matInput placeholder="Username" formControlName="username" required>
+            <mat-hint>Entrer votre identifiant ..</mat-hint>
+          </mat-form-field>
+          <br><br>
+          <mat-form-field appearance="outline">
+            <mat-label>Mot de Pass</mat-label>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+            <mat-hint>Entrer votre Mot de Pass ..</mat-hint>
+          </mat-form-field>
+          <br><br>
+          <mat-checkbox formControlName="rememberMe" [checked]="rememberMe">Se souvenir de moi !</mat-checkbox>
+          <br>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <h5 id="errorLogin" *ngIf="errorLogin">Erreur d'authentification! entrer un identifiant et mot de pass valides.</h5>
+        <button mat-raised-button color="primary" (click)="onSubmitForm()" [disabled]="userLoginForm.invalid">Login
+        </button>
+        <br>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row style="margin-top: 20px">
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <img src="assets/img/logo-isma.png" width="50" style="margin-left: 20px">
+    <h1 id="app-name">{{appTitle}}</h1>
+    <span class="menu-spacer"></span>
+    <div id="toolbar-actions">
+      <div class="toolbar-spacing">
+        <a mat-button [routerLink]="'/dashboard'">Acceuil</a>
+        <a mat-button [routerLink]="'/dashboard/agents'">Étudiants</a>
+        <a mat-button [routerLink]="'/dashboard/agencies'">Enseignants</a>
+        <a mat-button [routerLink]="'/dashboard/agencies'">Cours</a>
+        <a mat-button [routerLink]="'/dashboard/agencies'">Salles</a>
+        <a mat-button [routerLink]="'/dashboard/agencies'">Planning</a>
+        <a mat-button [routerLink]="'/dashboard/agencies'">Paiements</a>
+      </div>
+      <button mat-icon-button id="logout-btn">
+        <mat-icon (click)="logout()">logout</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/dashboard'">Home</a>
+      <a mat-list-item [routerLink]="'/dashboard/agents'">All Agents</a>
+      <a mat-list-item [routerLink]="'/dashboard/agents'">Add Agents</a>
+      <a mat-list-item [routerLink]="'/dashboard/agents'">Modify Agents</a>
+      <a mat-list-item [routerLink]="'/dashboard/agencies'">All Agencies</a>
+      <a mat-list-item [routerLink]="'/dashboard/agencies'">Add Agency</a>
+      <a mat-list-item [routerLink]="'/dashboard/agencies'">Modify Agencies</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="background-color: #3F51B5">
+      <br>
+      <div style="display: flex;flex-direction: row; padding-left: 25px; padding-bottom: 20px;elevation: higher; color: white;">
+        <div routerLink="/" routerLinkActive="active" (click)="back2Main()" style="cursor:pointer" class="vertical-align-text">Acceuil</div>
+        <div *ngIf="numItemsSelected >= 1">&nbsp;<mat-icon>chevron_right</mat-icon></div>
+        <span *ngIf="numItemsSelected >= 1" routerLink="/" routerLinkActive="active" class="vertical-align-text" style="cursor:pointer;vertical-align: middle;" (click)="toBreadcrum1();">&nbsp;{{breadcrumb1.option}}</span>
+        <div *ngIf="numItemsSelected >= 2">&nbsp;<mat-icon>chevron_right</mat-icon></div>
+        <span *ngIf="numItemsSelected >= 2" routerLink="/" routerLinkActive="active" class="vertical-align-text" style="cursor:pointer" (click)="toBreadcrum2();">&nbsp;{{breadcrumb2.option}}</span>
+        <div *ngIf="numItemsSelected >= 3">&nbsp;<mat-icon>chevron_right</mat-icon></div>
+        <span *ngIf="numItemsSelected >= 3" routerLink="/" routerLinkActive="active" class="vertical-align-text" style="cursor:pointer" (click)="toBreadcrum2();">&nbsp;{{breadcrumb3.option}}</span>
+      </div>
+
+      <div style="display: flex;flex-direction: row;background-color:white; height:90vh">
+        <mat-tab-group class="navigation-tabs" [selectedIndex]="currentSelectedRootTab" dynamicHeight style="width:15vw; background-color:#3F51B5;">
+          <mat-tab *ngFor="let rootTab of rootTabs; let rootIndex = index" [label]="rootIndex">
+            <mat-nav-list>
+              <div *ngFor="let rootOption of rootTab.options; let optionIndex = index;">
+                <a mat-list-item *ngIf="!rootOption.rootTab" style="color: white" [routerLink]="rootOption.route" routerLinkActive="active"><div><mat-icon style="margin-right: 8px;">{{rootOption.icon}}</mat-icon></div> {{rootOption.option}}</a>
+                <a mat-list-item style="width:100%; color: white;" *ngIf="rootOption.rootTab" (click)="rootSelected(optionIndex, rootOption.rootTab, rootOption)"><div><mat-icon style="margin-right: 8px;">{{rootOption.icon}}</mat-icon></div>{{rootOption.option}}<div><mat-icon style="padding-left:20%;vertical-align: middle;">chevron_right</mat-icon></div></a>
+              </div>
+            </mat-nav-list>
+          </mat-tab>
+        </mat-tab-group>
+        <div style="margin:auto">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
